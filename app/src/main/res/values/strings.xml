@@ -1,0 +1,37 @@
+<resources>
+    <string name="app_name">Voca Go Lite</string>
+
+    <!-- OnBoarding -->
+    <string name="onboarding_title_1">Welcome to VocaGo</string>
+    <string name="onboarding_desc_1">Your personal vocabulary learning companion. Master new words effectively with smart learning techniques.</string>
+
+    <string name="onboarding_title_2">Learn Vocabulary</string>
+    <string name="onboarding_desc_2">Learn new words with flashcards, quizzes, and spaced repetition. Track your progress and improve every day.</string>
+
+    <string name="onboarding_title_3">Explore with Friends</string>
+    <string name="onboarding_desc_3">Share your word collections, compete with friends, and learn together. Make vocabulary learning fun and social.</string>
+
+    <string name="onboarding_title_4">Choose Language</string>
+    <string name="onboarding_desc_4">Select your preferred language for the app interface.</string>
+
+    <string name="onboarding_title_5">Choose Theme</string>
+    <string name="onboarding_desc_5">Select your preferred appearance for the app.</string>
+
+    <!-- Theme -->
+    <string name="theme_system">System</string>
+    <string name="theme_light">Light</string>
+    <string name="theme_dark">Dark</string>
+
+    <!-- Buttons -->
+    <string name="btn_next">Next</string>
+    <string name="btn_prev">Back</string>
+    <string name="btn_get_started">Get Started</string>
+    <string name="btn_skip">Skip</string>
+    <string name="btn_cancel">Cancel</string>
+    <string name="btn_continue">Continue</string>
+    <string name="btn_retry">Retry</string>
+
+    <!-- Dialog -->
+    <string name="dialog_change_language_title">Change Language?</string>
+    <string name="dialog_change_language_message">The app will restart to apply the new language. Your current progress will be saved.</string>
+</resources>

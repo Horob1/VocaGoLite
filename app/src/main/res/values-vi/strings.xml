@@ -1,0 +1,37 @@
+<resources>
+    <string name="app_name">Voca Go Lite</string>
+
+    <!-- OnBoarding -->
+    <string name="onboarding_title_1">Chào mừng bạn đến với VocaGo</string>
+    <string name="onboarding_desc_1">Người bạn đồng hành học từ vựng cá nhân của bạn. Nắm vững từ mới một cách hiệu quả với các kỹ thuật học tập thông minh.</string>
+
+    <string name="onboarding_title_2">Học từ vựng</string>
+    <string name="onboarding_desc_2">Học từ mới với thẻ ghi nhớ, câu đố và lặp lại cách nhau. Theo dõi tiến trình của bạn và cải thiện mỗi ngày.</string>
+
+    <string name="onboarding_title_3">Khám phá cùng bạn bè</string>
+    <string name="onboarding_desc_3">Chia sẻ bộ sưu tập từ của bạn, cạnh tranh với bạn bè và cùng nhau học hỏi. Làm cho việc học từ vựng trở nên thú vị và mang tính xã hội.</string>
+
+    <string name="onboarding_title_4">Chọn ngôn ngữ</string>
+    <string name="onboarding_desc_4">Chọn ngôn ngữ ưa thích của bạn cho giao diện ứng dụng.</string>
+
+    <string name="onboarding_title_5">Chọn chủ đề</string>
+    <string name="onboarding_desc_5">Chọn giao diện ưa thích của bạn cho ứng dụng.</string>
+
+    <!-- Theme -->
+    <string name="theme_system">Hệ thống</string>
+    <string name="theme_light">Ánh sáng</string>
+    <string name="theme_dark">Tối</string>
+
+    <!-- Buttons -->
+    <string name="btn_next">Kế tiếp</string>
+    <string name="btn_prev">Quay lại</string>
+    <string name="btn_get_started">Bắt đầu</string>
+    <string name="btn_skip">Bỏ qua</string>
+    <string name="btn_cancel">Hủy bỏ</string>
+    <string name="btn_continue">Tiếp tục</string>
+    <string name="btn_retry">Thử lại</string>
+
+    <!-- Dialog -->
+    <string name="dialog_change_language_title">Thay đổi ngôn ngữ\?</string>
+    <string name="dialog_change_language_message">Ứng dụng sẽ khởi động lại để áp dụng ngôn ngữ mới. Tiến trình hiện tại của bạn sẽ được lưu.</string>
+</resources>
