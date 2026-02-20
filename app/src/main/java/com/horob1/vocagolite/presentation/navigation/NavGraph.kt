@@ -13,6 +13,7 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import com.horob1.vocagolite.presentation.screen.main.MainBottomBar
 import com.horob1.vocagolite.presentation.screen.onboarding.OnBoardingScreen
 import com.horob1.vocagolite.presentation.screen.onboarding.OnBoardingViewModel
 import org.koin.compose.viewmodel.koinViewModel
@@ -59,7 +60,9 @@ fun SetupMainNavGraph(
     rootNavController: NavHostController
 ) {
     val mainNavGraph = rememberNavController()
-    Scaffold { innerPadding ->
+    Scaffold(
+        bottomBar = { MainBottomBar(navController = mainNavGraph) }
+    ) { innerPadding ->
         NavHost(
             navController = mainNavGraph,
             startDestination = NavScreen.Home,

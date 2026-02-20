@@ -1,6 +1,5 @@
 package com.horob1.vocagolite.presentation.screen.onboarding
 
-import android.content.res.Configuration
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -17,7 +16,6 @@ import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.platform.LocalContext
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.horob1.vocagolite.presentation.common.UiState
@@ -26,7 +24,6 @@ import com.horob1.vocagolite.presentation.common.components.LoadingBox
 import com.horob1.vocagolite.presentation.screen.onboarding.components.ChangeLanguageDialog
 import com.horob1.vocagolite.presentation.screen.onboarding.components.ChooseLanguagePage
 import com.horob1.vocagolite.presentation.screen.onboarding.components.ChooseThemePage
-import com.horob1.vocagolite.presentation.screen.onboarding.components.OnBoardingBackground
 import com.horob1.vocagolite.presentation.screen.onboarding.components.OnBoardingContentPage
 import com.horob1.vocagolite.presentation.screen.onboarding.components.PageController
 import com.horob1.vocagolite.presentation.screen.onboarding.components.PagerIndicator
@@ -50,8 +47,6 @@ fun OnBoardingScreen(
 ) {
     val uiState by viewModel.uiState.collectAsStateWithLifecycle()
     val dimens = MaterialTheme.dimens
-    val configuration = LocalConfiguration.current
-    val isLandscape = configuration.orientation == Configuration.ORIENTATION_LANDSCAPE
     val context = LocalContext.current
 
     val pagerState = rememberPagerState(
@@ -79,102 +74,92 @@ fun OnBoardingScreen(
 
         is UiState.Success -> {
             val settings = (uiState as UiState.Success<OnBoardingUiState>).data
-
             Scaffold { innerPadding ->
-                OnBoardingBackground(
+
+                Column(
                     modifier = Modifier
                         .padding(innerPadding)
                         .fillMaxSize()
                 ) {
-                    Column(
-                        modifier = Modifier.fillMaxSize()
-                    ) {
-                        // Pager
-                        HorizontalPager(
-                            modifier = Modifier.weight(1f),
-                            state = pagerState,
-                            verticalAlignment = Alignment.Top,
-                            beyondViewportPageCount = 1
-                        ) { page ->
-                            val pageOffset =
-                                (pagerState.currentPage - page) + pagerState.currentPageOffsetFraction
-                            val isCurrentPage = pagerState.currentPage == page
+                    // Pager
+                    HorizontalPager(
+                        modifier = Modifier.weight(1f),
+                        state = pagerState,
+                        verticalAlignment = Alignment.Top,
+                        beyondViewportPageCount = 1
+                    ) { page ->
+                        val pageOffset =
+                            (pagerState.currentPage - page) + pagerState.currentPageOffsetFraction
+                        val isCurrentPage = pagerState.currentPage == page
 
-                            when (page) {
-                                in 0..2 -> {
-                                    OnBoardingContentPage(
-                                        pageData = OnBoardingPageData.pages[page],
-                                        pageOffset = pageOffset,
-                                        isLandscape = isLandscape,
-                                        isCurrentPage = isCurrentPage
-                                    )
-                                }
+                        when (page) {
+                            in 0..2 -> {
+                                OnBoardingContentPage(
+                                    pageData = OnBoardingPageData.pages[page],
+                                    pageOffset = pageOffset,
+                                    isCurrentPage = isCurrentPage
+                                )
+                            }
 
-                                3 -> {
-                                    ChooseLanguagePage(
-                                        currentLanguage = settings.appLanguage,
-                                        onLanguageSelected = { language ->
-                                            if (language != settings.appLanguage) {
-                                                dialogState = LanguageDialogState(
-                                                    isVisible = true,
-                                                    pendingLanguage = language
-                                                )
-                                            }
-                                        },
-                                        pageOffset = pageOffset,
-                                        isLandscape = isLandscape,
-                                        isCurrentPage = isCurrentPage
-                                    )
-                                }
+                            3 -> {
+                                ChooseLanguagePage(
+                                    currentLanguage = settings.appLanguage,
+                                    onLanguageSelected = { language ->
+                                        if (language != settings.appLanguage) {
+                                            dialogState = LanguageDialogState(
+                                                isVisible = true,
+                                                pendingLanguage = language
+                                            )
+                                        }
+                                    },
+                                    pageOffset = pageOffset,
+                                    isCurrentPage = isCurrentPage
+                                )
+                            }
 
-                                4 -> {
-                                    ChooseThemePage(
-                                        currentTheme = settings.appTheme,
-                                        onThemeSelected = { viewModel.setAppTheme(it) },
-                                        pageOffset = pageOffset,
-                                        isLandscape = isLandscape,
-                                        isCurrentPage = isCurrentPage
-                                    )
-                                }
+                            4 -> {
+                                ChooseThemePage(
+                                    currentTheme = settings.appTheme,
+                                    onThemeSelected = { viewModel.setAppTheme(it) },
+                                    pageOffset = pageOffset,
+                                    isCurrentPage = isCurrentPage
+                                )
                             }
                         }
-
-                        // Pager Indicator - only show separately in portrait mode
-                        if (!isLandscape) {
-                            PagerIndicator(
-                                pageCount = OnBoardingPageData.TOTAL_PAGES,
-                                currentPage = pagerState.currentPage,
-                                modifier = Modifier
-                                    .fillMaxWidth()
-                                    .padding(vertical = dimens.spaceSM)
-                            )
-                        }
-
-                        // Navigation Controller - includes indicator in landscape mode
-                        PageController(
-                            currentPage = pagerState.currentPage,
-                            pageCount = OnBoardingPageData.TOTAL_PAGES,
-                            onPrevious = {
-                                scope.launch {
-                                    pagerState.animateScrollToPage(pagerState.currentPage - 1)
-                                }
-                            },
-                            onNext = {
-                                scope.launch {
-                                    pagerState.animateScrollToPage(pagerState.currentPage + 1)
-                                }
-                            },
-                            onComplete = {
-                                viewModel.completeOnBoarding()
-                                onCompleteOnBoarding()
-                            },
-                            showIndicator = isLandscape,
-                            modifier = Modifier.padding(
-                                horizontal = dimens.paddingScreen,
-                                vertical = dimens.spaceSM
-                            )
-                        )
                     }
+
+                    // Pager Indicator
+                    PagerIndicator(
+                        pageCount = OnBoardingPageData.TOTAL_PAGES,
+                        currentPage = pagerState.currentPage,
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .padding(vertical = dimens.spaceSM)
+                    )
+
+                    // Navigation Controller
+                    PageController(
+                        currentPage = pagerState.currentPage,
+                        pageCount = OnBoardingPageData.TOTAL_PAGES,
+                        onPrevious = {
+                            scope.launch {
+                                pagerState.animateScrollToPage(pagerState.currentPage - 1)
+                            }
+                        },
+                        onNext = {
+                            scope.launch {
+                                pagerState.animateScrollToPage(pagerState.currentPage + 1)
+                            }
+                        },
+                        onComplete = {
+                            viewModel.completeOnBoarding()
+                            onCompleteOnBoarding()
+                        },
+                        modifier = Modifier.padding(
+                            horizontal = dimens.paddingScreen,
+                            vertical = dimens.spaceSM
+                        )
+                    )
                 }
             }
 

@@ -34,4 +34,10 @@
     <!-- Dialog -->
     <string name="dialog_change_language_title">Thay đổi ngôn ngữ\?</string>
     <string name="dialog_change_language_message">Ứng dụng sẽ khởi động lại để áp dụng ngôn ngữ mới. Tiến trình hiện tại của bạn sẽ được lưu.</string>
+
+    <!-- Main -->
+    <string name="main_home">Trang chủ</string>
+    <string name="main_explore">Khám phá</string>
+    <string name="main_setting">Cài đặt</string>
+    <string name="main_about">Giới thiệu</string>
 </resources>

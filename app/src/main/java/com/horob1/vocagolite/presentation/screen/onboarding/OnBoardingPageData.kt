@@ -8,9 +8,9 @@ import com.horob1.vocagolite.R
  * Sealed class representing OnBoarding page data
  */
 sealed class OnBoardingPageData(
-    @StringRes val title: Int,
-    @StringRes val description: Int,
-    @DrawableRes val image: Int
+    @param:StringRes val title: Int,
+    @param:StringRes val description: Int,
+    @param:DrawableRes val image: Int
 ) {
     data object Welcome : OnBoardingPageData(
         title = R.string.onboarding_title_1,
